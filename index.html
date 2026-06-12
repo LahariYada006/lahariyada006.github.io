@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lahari Yada – Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface2: #1c1c27;
+      --border: #2a2a3a;
+      --accent: #7c6af7;
+      --accent2: #a78bfa;
+      --accent-glow: rgba(124, 106, 247, 0.15);
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --white: #ffffff;
+      --green: #4ade80;
+      --tag-bg: rgba(124, 106, 247, 0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 60px;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 18px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 120px 60px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,106,247,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute; bottom: -100px; left: -100px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--tag-bg); border: 1px solid var(--accent);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 13px; color: var(--accent2);
+      margin-bottom: 24px;
+    }
+    .hero-badge::before { content: '●'; font-size: 8px; color: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 700; line-height: 1.1;
+      color: var(--white); margin-bottom: 16px;
+    }
+    h1 span { color: var(--accent2); }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--muted); max-width: 560px;
+      margin-bottom: 40px; font-weight: 400;
+    }
+    .hero-stats {
+      display: flex; gap: 40px; margin-bottom: 44px;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px; font-weight: 700; color: var(--white);
+    }
+    .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 8px;
+      font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s; cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--white);
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,106,247,0.35); }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section { padding: 80px 60px; }
+    .section-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--accent2);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700; color: var(--white);
+      margin-bottom: 48px; line-height: 1.2;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 16px; font-size: 15px; }
+    .about-text p strong { color: var(--text); }
+    .about-highlights { display: flex; flex-direction: column; gap: 16px; }
+    .highlight-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 24px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: border-color 0.2s;
+    }
+    .highlight-card:hover { border-color: var(--accent); }
+    .highlight-icon { font-size: 24px; flex-shrink: 0; }
+    .highlight-title { font-weight: 600; color: var(--white); font-size: 14px; margin-bottom: 4px; }
+    .highlight-desc { font-size: 13px; color: var(--muted); }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+      transition: all 0.25s; position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--accent-glow), transparent);
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(124,106,247,0.15); }
+    .project-card:hover::before { opacity: 1; }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .project-domain {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent2);
+      background: var(--tag-bg); border: 1px solid rgba(124,106,247,0.3);
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .project-links { display: flex; gap: 10px; }
+    .project-links a {
+      color: var(--muted); text-decoration: none; font-size: 13px;
+      padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .project-links a:hover { color: var(--accent2); border-color: var(--accent); }
+    .project-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .project-desc { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .project-metrics { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .metric {
+      background: var(--surface2); border-radius: 8px;
+      padding: 8px 14px; text-align: center;
+    }
+    .metric-val { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--accent2); }
+    .metric-label { font-size: 11px; color: var(--muted); }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 12px; color: var(--muted);
+      background: var(--surface2); border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 6px;
+    }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .skill-group {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .skill-group-title {
+      font-size: 13px; font-weight: 600; color: var(--accent2);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .skill-items { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-item {
+      font-size: 13px; color: var(--text);
+      background: var(--surface2); border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 6px;
+    }
+
+    /* ACHIEVEMENTS */
+    .achievements-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .achievement-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .achievement-card:hover { border-color: var(--accent); }
+    .achievement-icon { font-size: 28px; flex-shrink: 0; }
+    .achievement-title { font-weight: 600; color: var(--white); font-size: 15px; margin-bottom: 4px; }
+    .achievement-desc { font-size: 13px; color: var(--muted); }
+
+    /* CONTACT */
+    .contact-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 60px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .contact-wrapper::before {
+      content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,106,247,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-wrapper h2 { margin-bottom: 16px; }
+    .contact-wrapper p { color: var(--muted); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 32px 60px;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 13px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px; background: var(--border);
+      margin: 0 60px;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero, section { padding: 80px 24px 60px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-stats { gap: 24px; }
+      .contact-wrapper { padding: 40px 24px; }
+      .divider { margin: 0 24px; }
+      footer { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Lahari<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'}); return false;">About</a></li>
+    <li><a href="#projects" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'}); return false;">Projects</a></li>
+    <li><a href="#skills" onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'}); return false;">Skills</a></li>
+    <li><a href="#achievements" onclick="document.getElementById('achievements').scrollIntoView({behavior:'smooth'}); return false;">Achievements</a></li>
+    <li><a href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); return false;">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-badge">Open to Internships & Research Opportunities</div>
+  <h1>Hi, I'm <span>Lahari Yada</span></h1>
+  <p class="hero-sub">3rd year B.Tech student at IIT Hyderabad building AI-powered applications — from NLP classifiers to multi-agent research engines.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">9.16</span>
+      <span class="stat-label">CGPA</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Projects</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">175+</span>
+      <span class="stat-label">DSA Problems</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">99.6%</span>
+      <span class="stat-label">ML Accuracy</span>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'}); return false;">View Projects →</a>
+    <a href="https://github.com/LahariYada006" target="_top" class="btn btn-secondary">GitHub</a>
+    <a href="https://www.linkedin.com/in/lahariyada/" target="_top" class="btn btn-secondary">LinkedIn</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2>Passionate about ML & <br/>Full-Stack Development</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>3rd year B.Tech student</strong> at the Indian Institute of Technology Hyderabad, majoring in Materials Science and Metallurgical Engineering with a CGPA of 9.16.</p>
+      <p>My passion lies at the intersection of <strong>Machine Learning and Software Engineering</strong> — I love building end-to-end AI applications that solve real problems, from training classifiers to deploying multi-agent pipelines.</p>
+      <p>I have hands-on experience with <strong>NLP, Generative AI, and full-stack web development</strong>, and I'm actively building projects that push the boundaries of what's possible with modern AI tools like Gemini 2.5 Flash and agentic workflows.</p>
+      <p>Currently preparing for SDE internships and always excited to collaborate on impactful projects.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card">
+        <div class="highlight-icon">🎓</div>
+        <div>
+          <div class="highlight-title">IIT Hyderabad</div>
+          <div class="highlight-desc">B.Tech Materials Science & Metallurgical Engineering · CGPA 9.16 · 2024–2028</div>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🤖</div>
+        <div>
+          <div class="highlight-title">ML & AI Focus</div>
+          <div class="highlight-desc">NLP, Supervised Learning, Generative AI, Multi-Agent Systems, LLMs</div>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🏆</div>
+        <div>
+          <div class="highlight-title">JEE Advanced 2024</div>
+          <div class="highlight-desc">CRL 13,015 among ~2,00,000 candidates · JEE Mains 98.1 percentile among 1M+</div>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">💡</div>
+        <div>
+          <div class="highlight-title">UG Sunshine Mentor</div>
+          <div class="highlight-desc">Mentoring 20+ junior students at IIT Hyderabad · 2025–26</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <h2>Things I've Built</h2>
+  <div class="projects-grid">
+
+    <!-- MailGuard -->
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-domain">NLP · ML</span>
+        <div class="project-links">
+          <a href="https://github.com/LahariYada006/Message-Spam-Classifier" target="_top">GitHub</a>
+          <a href="https://message-spam-classifier-cjwzg6glc9pz2w2wurxoas.streamlit.app/" target="_top">Live ↗</a>
+        </div>
+      </div>
+      <div class="project-name">MailGuard</div>
+      <div class="project-desc">SVM-based SMS spam classifier with a 3-stage NLP preprocessing pipeline, deployed as a real-time Streamlit web app.</div>
+      <div class="project-metrics">
+        <div class="metric"><div class="metric-val">99.6%</div><div class="metric-label">Accuracy</div></div>
+        <div class="metric"><div class="metric-val">97%</div><div class="metric-label">Precision</div></div>
+        <div class="metric"><div class="metric-val">96%</div><div class="metric-label">F1-Score</div></div>
+        <div class="metric"><div class="metric-val">5,572</div><div class="metric-label">Messages</div></div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">SVM</span>
+        <span class="tag">NLTK</span><span class="tag">TF-IDF</span><span class="tag">Streamlit</span>
+      </div>
+    </div>
+
+    <!-- ResearchMind AI -->
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-domain">GenAI · Agents</span>
+        <div class="project-links">
+          <a href="https://github.com/LahariYada006/researchmind" target="_top">GitHub</a>
+          <a href="https://researchmind-beta.vercel.app/" target="_top">Live ↗</a>
+        </div>
+      </div>
+      <div class="project-name">ResearchMind AI</div>
+      <div class="project-desc">7-agent sequential AI research engine that auto-generates structured reports using Google Gemini 2.5 Flash and Tavily Search API.</div>
+      <div class="project-metrics">
+        <div class="metric"><div class="metric-val">7</div><div class="metric-label">AI Agents</div></div>
+        <div class="metric"><div class="metric-val">~80%</div><div class="metric-label">Time Saved</div></div>
+        <div class="metric"><div class="metric-val">&lt;200ms</div><div class="metric-label">Latency</div></div>
+        <div class="metric"><div class="metric-val">10+</div><div class="metric-label">Sources/Query</div></div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Gemini 2.5</span>
+        <span class="tag">Tavily API</span><span class="tag">SSE</span><span class="tag">Vite</span>
+      </div>
+    </div>
+
+    <!-- Chat App -->
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-domain">Full-Stack</span>
+        <div class="project-links">
+          <a href="https://github.com/LahariYada006/react-app" target="_top">GitHub</a>
+          <a href="https://react-app-two-lac.vercel.app/" target="_top">Live ↗</a>
+        </div>
+      </div>
+      <div class="project-name">Real-Time Chat App</div>
+      <div class="project-desc">Full-stack messaging platform with Socket.IO, JWT auth, file sharing, and zero-downtime CI/CD deployment on Railway + Vercel.</div>
+      <div class="project-metrics">
+        <div class="metric"><div class="metric-val">10+</div><div class="metric-label">REST APIs</div></div>
+        <div class="metric"><div class="metric-val">2-level</div><div class="metric-label">RBAC</div></div>
+        <div class="metric"><div class="metric-val">0</div><div class="metric-label">Downtime</div></div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Socket.IO</span>
+        <span class="tag">MongoDB</span><span class="tag">JWT</span><span class="tag">Express.js</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Skills</div>
+  <h2>Technical Toolkit</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Machine Learning</div>
+      <div class="skill-items">
+        <span class="skill-item">Scikit-learn</span>
+        <span class="skill-item">SVM</span>
+        <span class="skill-item">Supervised Learning</span>
+        <span class="skill-item">Feature Engineering</span>
+        <span class="skill-item">Model Evaluation</span>
+        <span class="skill-item">Class Imbalance</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">NLP & AI</div>
+      <div class="skill-items">
+        <span class="skill-item">NLTK</span>
+        <span class="skill-item">TF-IDF</span>
+        <span class="skill-item">LLMs</span>
+        <span class="skill-item">Generative AI</span>
+        <span class="skill-item">Multi-Agent Systems</span>
+        <span class="skill-item">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-items">
+        <span class="skill-item">React.js</span>
+        <span class="skill-item">Vite</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">HTML/CSS</span>
+        <span class="skill-item">Framer Motion</span>
+        <span class="skill-item">Streamlit</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend & DB</div>
+      <div class="skill-items">
+        <span class="skill-item">Node.js</span>
+        <span class="skill-item">Express.js</span>
+        <span class="skill-item">REST APIs</span>
+        <span class="skill-item">Socket.IO</span>
+        <span class="skill-item">MongoDB</span>
+        <span class="skill-item">JWT Auth</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-items">
+        <span class="skill-item">Python</span>
+        <span class="skill-item">C++</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">C</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools & DSA</div>
+      <div class="skill-items">
+        <span class="skill-item">Git & GitHub</span>
+        <span class="skill-item">Postman</span>
+        <span class="skill-item">VS Code</span>
+        <span class="skill-item">Figma</span>
+        <span class="skill-item">Arrays & Trees</span>
+        <span class="skill-item">Graphs & Heaps</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Achievements</div>
+  <h2>Milestones</h2>
+  <div class="achievements-list">
+    <div class="achievement-card">
+      <div class="achievement-icon">🥇</div>
+      <div>
+        <div class="achievement-title">JEE Advanced 2024 — CRL 13,015</div>
+        <div class="achievement-desc">Among ~2,00,000 candidates. Strong mathematical & analytical foundation.</div>
+      </div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">📊</div>
+      <div>
+        <div class="achievement-title">JEE Mains 2024 — 98.1 Percentile</div>
+        <div class="achievement-desc">Ranked in top 2% among 1M+ candidates nationwide.</div>
+      </div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">🏆</div>
+      <div>
+        <div class="achievement-title">TSRJC State Topper 2022</div>
+        <div class="achievement-desc">Ranked 1st in Telangana State in the TSRJC competitive examination.</div>
+      </div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">💻</div>
+      <div>
+        <div class="achievement-title">175+ LeetCode Problems</div>
+        <div class="achievement-desc">Arrays, Trees, Graphs, Dynamic Programming, and more.</div>
+      </div>
+    </div>
+
+    <div class="achievement-card">
+      <div class="achievement-icon">🌟</div>
+      <div>
+        <div class="achievement-title">UG Sunshine Mentor — IIT Hyderabad</div>
+        <div class="achievement-desc">Mentoring 20+ junior students, coordinating onboarding sessions. 2025–26.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+    <div class="section-label" style="margin-bottom:12px;">Contact</div>
+    <h2>Let's Connect</h2>
+    <p>I'm open to internships, research collaborations, and exciting projects. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:lahariyada06@gmail.com" class="btn btn-primary">✉ lahariyada06@gmail.com</a>
+      <a href="https://www.linkedin.com/in/lahariyada/" target="_top" class="btn btn-secondary">LinkedIn</a>
+      <a href="https://github.com/LahariYada006" target="_top" class="btn btn-secondary">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built by Lahari Yada · IIT Hyderabad · 2026</p>
+</footer>
+
+</body>
+</html>
